@@ -1,0 +1,215 @@
+body {
+    background: #EDEDED;
+
+}
+
+.recette-card {
+    width: 380px;
+    height: 731px;
+    border-radius: 21px;
+    box-shadow: 0px 4px 34px 30px #0000000A;
+    overflow: auto;
+}
+
+
+.photos-plat {
+    position: relative;
+    box-shadow: 0px 4px 34px 30px #0000000A;
+    border-radius: 21px 21px 0px 0px;
+    width: 380px;
+    height: 253px;
+
+}
+
+.time-plat {
+    position: relative;
+    width: 65px;
+    height: 26px;
+    top: -240px;
+    left: 295px;
+    padding: 5px 15px 5px 15px;
+    border-radius: 14px;
+    gap: 10px;
+    background: #FFD15B;
+    color: #000000;
+
+
+}
+
+.banniere-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banniere {
+    position: relative;
+    max-width: 1400px;
+    min-height: 600px;
+}
+
+#logo {
+    position: absolute;
+    width: 207px;
+    height: 25.26px;
+    top: 51px;
+    left: 330px;
+
+
+}
+
+.filtre-section {
+    display: flex;
+    gap: 63px;
+    margin: auto;
+    width: 54%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.filtre-section select {
+    width: 195px;
+    height: 56px;
+    top: 688px;
+    left: 104px;
+    padding: 17px 16px;
+    border-radius: 11px;
+    font-family: Manrope;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+
+
+}
+
+.flitres {
+    display: flex;
+    width: 85%;
+    align-items: center;
+
+}
+
+.nombre-recette {
+    width: 115px;
+    height: 32px;
+    font-family: Anton;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: left;
+
+
+}
+
+.recipes_section {
+    margin: auto;
+    width: 70%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
+    justify-items: center;
+}
+
+h2 {
+    font-family: Anton;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.info-recette {
+    padding: 20px;
+
+}
+
+.info-recette h3 {
+    font-family: Manrope;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: 0.09em;
+    text-align: left;
+    color: #7A7A7A;
+
+}
+
+.text-description {
+    font-family: Manrope;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+
+
+}
+
+.ingredient-name {
+    font-family: Manrope;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.ingredient-quantity {
+    font-family: Manrope;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #7A7A7A;
+
+}
+
+.search {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.search-descript {
+    position: absolute;
+    width: 890px;
+    height: 132px;
+    top: 245px;
+    left: 490px;
+    font-family: Anton;
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 66px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFD15B;
+
+}
+
+.search-descript p {
+    margin: 0;
+}
+
+.search-input input {
+    position: absolute;
+    width: 954px;
+    height: 72px;
+    top: 406.42px;
+    left: 460px;
+
+}
+
+.section-ingredient {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

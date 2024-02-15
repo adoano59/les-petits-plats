@@ -6,6 +6,7 @@ function appareilsTemplate(recipes) {
         // Ajouter l'option statique pour le titre "appareils"
         const appareilsTitleOption = document.createElement('option');
         appareilsTitleOption.textContent = 'Appareils';
+        appareilsTitleOption.disabled = true;
         appareilsDropdown.appendChild(appareilsTitleOption);
         let optionTemp = [];
         // Ajouter chaque appareil au dropdown
@@ -13,10 +14,10 @@ function appareilsTemplate(recipes) {
             const option = document.createElement('option');
             option.textContent = recipe.appliance;
             option.value = recipe.appliance;
-           if (!optionTemp.includes(option.value.toLowerCase())) {
+            if (!optionTemp.includes(option.value.toLowerCase())) {
                 appareilsDropdown.appendChild(option);
                 optionTemp.push(option.value.toLowerCase());
-           }
+            }
 
         });
     }

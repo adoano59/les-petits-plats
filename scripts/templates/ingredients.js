@@ -16,6 +16,7 @@ function ingredientsTemplate(recipes) {
             if (!optionTemp.includes(option.value.toLowerCase())) {
                 ingredientsDropdown.appendChild(option);
                 optionTemp.push(option.value.toLowerCase());
+
             }
 
         }));

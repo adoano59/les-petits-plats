@@ -19,7 +19,11 @@ function ustensilsTemplate(recipes) {
             }
 
         }));
+      
     }
+   
 
-    return { fillDropdown };
-}
+
+    
+     return { fillDropdown };
+};

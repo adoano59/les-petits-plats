@@ -17,11 +17,30 @@ updateListFilter(recipes);
 function rechercherRecettes(rechercheTerm) {
     // Filtrer les recettes en fonction du terme de recherche
     const term = rechercheTerm.toLowerCase();
-    const resultats = recipes.filter(recette =>
-        recette.name.toLowerCase().includes(term) ||
-        recette.ingredients.find(ingredient => typeof ingredient === 'string' && ingredient.toLowerCase().includes(term)) ||
-        recette.description.toLowerCase().includes(term)
-    );
+    // const resultats = recipes.filter(recette =>
+    //     recette.name.toLowerCase().includes(term) ||
+    //     recette.ingredients.find(ingredient => typeof ingredient === 'string' && ingredient.toLowerCase().includes(term)) ||
+    //     recette.description.toLowerCase().includes(term)
+    // );
+    let resultats = [];
+    for (let i = 0; i < recipes.length; i++) {
+        let recette = recipes[i];
+        if (recette.name.toLowerCase().includes(term)
+            || recette.description.toLowerCase().includes(term)) {
+
+            resultats.push(recette);
+        } else {
+            for (let j = 0; j < recette.ingredients.length; j++) {
+                let ingredient = recette.ingredients[j];
+                if ( typeof ingredient === 'string' && ingredient.toLowerCase().includes(term)) {
+                    resultats.push(recette);
+                }
+                break;
+            }
+        }
+
+    };
+    console.log(resultats);
     // Afficher les résultats de la recherche
     displayRecipes(resultats);
     updateListFilter(resultats);

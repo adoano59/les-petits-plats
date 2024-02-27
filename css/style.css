@@ -94,10 +94,13 @@ body {
 
 .flitres {
     display: flex;
+    align-items: center;
 
 }
 
 .nombre-recette {
+    position: relative;
+    left: -300px;
     width: 115px;
     height: 32px;
     font-family: Anton;

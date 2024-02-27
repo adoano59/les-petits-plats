@@ -21,9 +21,5 @@ function ustensilsTemplate(recipes) {
         }));
       
     }
-   
-
-
-    
      return { fillDropdown };
 };

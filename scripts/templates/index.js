@@ -82,6 +82,8 @@ function recipesTemplate(data) {
 
         // Retourne la fiche de la recette
         return ficheElement;
-    }
+    } 
+
     return { createrecipesCard };
+   
 }

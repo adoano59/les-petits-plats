@@ -9,53 +9,49 @@ function displayRecipes(recipes) {
         sectionFiches.appendChild(ficheElement);
 
     }
+    const nombreRecettesAffichees = recipes.length;
+    const nombreRecettesElement = document.querySelector(".nombre-recette");
+    nombreRecettesElement.innerText = +`${nombreRecettesAffichees}` + ` recettes`;
 
 };
 displayRecipes(recipes);
 updateListFilter(recipes);
-// Fonction de recherche
-function rechercherRecettes(rechercheTerm) {
-    // Filtrer les recettes en fonction du terme de recherche
-    const term = rechercheTerm.toLowerCase();
-    const resultats = recipes.filter(recette =>
-        recette.name.toLowerCase().includes(term) ||
-        recette.ingredients.find(ingredient => typeof ingredient === 'string' && ingredient.toLowerCase().includes(term)) ||
-        recette.description.toLowerCase().includes(term)
-        //|| ustensilsCliked.length >0 && recette.ustensils.some(u=> ustensilsClicked.includes(u))
-    );
-    // Afficher les résultats de la recherche
-    displayRecipes(resultats);
-    updateListFilter(resultats);
-    const nombreRecettesAffichees = resultats.length;
-    const nombreRecettesElement = document.querySelector(".nombre-recette");
-    if (nombreRecettesAffichees < 2) {
-        nombreRecettesElement.innerText = +`${nombreRecettesAffichees}` + ` recette`;
-    } else
-        nombreRecettesElement.innerText = +`${nombreRecettesAffichees}` + ` recettes`;
 
-};
+let selectedUstensils = []
+let selectedIngredients = []
+let selectedAppareils = []
 
 
 // Événement de saisie dans le champ de recherche
 const champRecherche = document.getElementById('champ-recherche'); // Supposez que 'champ-recherche' est l'ID de votre champ de recherche
-//a l'entree de l'input 
-champRecherche.addEventListener("focusin", () => {
-    if (champRecherche.value === `Rechercher une recette, un ingrédient, ...`) {
 
-        champRecherche.value = ""
-    }
-});
-//a la sortie de l'input 
-champRecherche.addEventListener("focusout", () => {
-    if (champRecherche.value === ``) {
 
-        champRecherche.value = "Rechercher une recette, un ingrédient, ..."
-    }
-});
-champRecherche.addEventListener('input', () => {
-    const saisieUtilisateur = champRecherche.value.trim();
-    if (saisieUtilisateur.length >= 3) { // Filtre les recherches à partir de 3 caractères
-        rechercherRecettes(saisieUtilisateur);
+// Fonction de recherche
+function searchRecipes() {
+    console.log(selectedUstensils.length);
+    const rechercheTerm = champRecherche.value.trim();
+    console.log(rechercheTerm);
+    if (rechercheTerm.length >= 3 || selectedIngredients.length > 0 || selectedAppareils.length > 0 || selectedUstensils.length > 0) { // Filtre les recherches à partir de 3 caractères
+        console.log(selectedUstensils.length);
+        // Filtrer les recettes en fonction du terme de recherche
+        const term = rechercheTerm.toLowerCase();
+        const resultats = recipes.filter(recette =>
+            (recette.name.toLowerCase().includes(term) ||
+                recette.ingredients.find(ingredient => typeof ingredient === 'string' && ingredient.toLowerCase().includes(term)) ||
+                recette.description.toLowerCase().includes(term))
+            && (selectedIngredients.length <= 0 || selectedIngredients.length > 0 && recette.ingredients.some(i => selectedIngredients.includes(i.ingredient.toLowerCase())))
+            && (selectedUstensils.length <= 0 || selectedUstensils.length > 0 && recette.ustensils.some(u => selectedUstensils.includes(u.toLowerCase())))
+            && (selectedAppareils.length <= 0 || selectedAppareils.length > 0 && selectedAppareils.includes(recette.appliance.toLowerCase()))
+        );
+        // Afficher les résultats de la recherche
+        displayRecipes(resultats);
+        updateListFilter(resultats);
+        const nombreRecettesAffichees = resultats.length;
+        const nombreRecettesElement = document.querySelector(".nombre-recette");
+        if (nombreRecettesAffichees < 2) {
+            nombreRecettesElement.innerText = +`${nombreRecettesAffichees}` + ` recette`;
+        } else
+            nombreRecettesElement.innerText = +`${nombreRecettesAffichees}` + ` recettes`;
     } else {
         // Si la saisie est inférieure à trois caractères, afficher toutes les recettes
         displayRecipes(recipes);
@@ -64,6 +60,12 @@ champRecherche.addEventListener('input', () => {
         const nombreRecettesElement = document.querySelector(".nombre-recette");
         nombreRecettesElement.innerText = +`${nombreRecettesAffichees}` + ` recettes`;
     }
+
+};
+
+
+champRecherche.addEventListener('input', () => {
+    searchRecipes();
 });
 
 function updateListFilter(recipes) {
@@ -81,42 +83,87 @@ const appareilsDropdown = document.getElementById('appareilsDropdown');
 const ustensilesDropdown = document.getElementById('ustensilsDropdown');
 const chipsSection = document.getElementById('sectionChips');
 chipsSection.innerHTML = '';
-// Tableau pour stocker les valeurs sélectionnées
-let selectedValues = [];
 ustensilesDropdown.addEventListener('change', event => {
     const selectedUstensil = event.target.value;
-    addChip(selectedUstensil);
+    addChipUstensil(selectedUstensil);
+    searchRecipes();
 });
 
 appareilsDropdown.addEventListener('change', event => {
     const selectedAppareil = event.target.value;
-    addChip(selectedAppareil);
+    addChipAppareil(selectedAppareil);
+    searchRecipes();
 });
 
 ingredientsDropdown.addEventListener('change', event => {
     const selectedIngredient = event.target.value;
-    addChip(selectedIngredient);
+    addChipIngredient(selectedIngredient);
+    searchRecipes();
 });
-function addChip(value) {
+
+function addChipUstensil(value) {
     // Vérifier si la valeur est déjà présente dans le tableau
-    if (!selectedValues.includes(value)) {
+    if (!selectedUstensils.includes(value)) {
         const chip = document.createElement('div');
         chip.textContent = value;
         chip.innerHTML += `<i class="fa-solid fa-xmark"></i>`;
         chipsSection.appendChild(chip);
         // Ajouter la valeur au tableau
-        selectedValues.push(value);
+        selectedUstensils.push(value.toLowerCase());
         chip.querySelector('.fa-xmark').addEventListener('click', () => {
             chip.remove();
             // Retirer la valeur du tableau selectedValues
-            const index = selectedValues.indexOf(value);
-            if (index !== -1) {
-                selectedValues.splice(index, 1);
+            const indexU = selectedUstensils.indexOf(value.toLowerCase());
+            if (indexU !== -1) {
+                selectedUstensils.splice(indexU, 1);
+                searchRecipes();
             }
 
         });
     };
+};
 
+function addChipIngredient(value) {
+    // Vérifier si la valeur est déjà présente dans le tableau
+    if (!selectedIngredients.includes(value)) {
+        const chip = document.createElement('div');
+        chip.textContent = value;
+        chip.innerHTML += `<i class="fa-solid fa-xmark"></i>`;
+        chipsSection.appendChild(chip);
+        // Ajouter la valeur au tableau
+        selectedIngredients.push(value.toLowerCase());
+        chip.querySelector('.fa-xmark').addEventListener('click', () => {
+            chip.remove();
+            // Retirer la valeur du tableau selectedValues
+            const indexI = selectedIngredients.indexOf(value.toLowerCase());
+            if (indexI !== -1) {
+                selectedIngredients.splice(indexI, 1);
+                searchRecipes();
+            }
 
+        });
+    };
+};
 
+function addChipAppareil(value) {
+    // Vérifier si la valeur est déjà présente dans le tableau
+    if (!selectedAppareils.includes(value)) {
+        const chip = document.createElement('div');
+        chip.textContent = value;
+        chip.innerHTML += `<i class="fa-solid fa-xmark"></i>`;
+        chipsSection.appendChild(chip);
+        // Ajouter la valeur au tableau
+        selectedAppareils.push(value.toLowerCase());
+        chip.querySelector('.fa-xmark').addEventListener('click', () => {
+            chip.remove();
+            // Retirer la valeur du tableau selectedValues
+            const indexA = selectedAppareils.indexOf(value.toLowerCase());
+            if (indexA !== -1) {
+                selectedAppareils.splice(indexA, 1);
+                searchRecipes();
+            }
+
+        });
+
+    };
 };

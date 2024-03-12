@@ -23,16 +23,14 @@ let selectedAppareils = []
 
 
 // Événement de saisie dans le champ de recherche
-const champRecherche = document.getElementById('champ-recherche'); // Supposez que 'champ-recherche' est l'ID de votre champ de recherche
+const champRecherche = document.getElementById('champ-recherche');
 
 
 // Fonction de recherche
 function searchRecipes() {
-    console.log(selectedUstensils.length);
     const rechercheTerm = champRecherche.value.trim();
-    console.log(rechercheTerm);
-    if (rechercheTerm.length >= 3 || selectedIngredients.length > 0 || selectedAppareils.length > 0 || selectedUstensils.length > 0) { // Filtre les recherches à partir de 3 caractères
-        console.log(selectedUstensils.length);
+    // Filtre les recherches à partir de 3 caractères
+    if (rechercheTerm.length >= 3 || selectedIngredients.length > 0 || selectedAppareils.length > 0 || selectedUstensils.length > 0) { 
         // Filtrer les recettes en fonction du terme de recherche
         const term = rechercheTerm.toLowerCase();
         const resultats = recipes.filter(recette =>

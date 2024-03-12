@@ -9,7 +9,7 @@ function ingredientsTemplate(recipes) {
         ingredientsDropdown.appendChild(ingredientsTitleOption);
         let optionTemp = [];
         // Ajouter chaque ingredient au dropdown
-        recipes.forEach(r => r.ingredients.forEach(e =>{
+        recipes.forEach(r => r.ingredients.forEach(e => {
             const option = document.createElement('option');
             option.textContent = e.ingredient;
             option.value = e.ingredient;

@@ -2,7 +2,7 @@
 function recipesTemplate(data) {
     // Destructuration de l'objet de données pour extraire les propriétés pertinentes
 
-    const { id, image, name, servings, ingredients, time, description, appliance, ustensils } = data;
+    const { image, name, ingredients, time, description } = data;
     // Fonction interne pour créer la carte de la recette
     function createrecipesCard() {
         // Création d'une balise dédiée à une fiche de la recette
@@ -82,8 +82,8 @@ function recipesTemplate(data) {
 
         // Retourne la fiche de la recette
         return ficheElement;
-    } 
+    }
 
     return { createrecipesCard };
-   
+
 }

@@ -10,6 +10,7 @@ body {
     box-shadow: 0px 4px 34px 30px #0000000A;
     overflow: auto;
 }
+
 /* Cacher la barre de défilement verticale */
 ::-webkit-scrollbar {
     width: 0;
@@ -264,14 +265,14 @@ select.decorated option:hover {
     margin-bottom: 20px;
     margin-left: 16%;
 
-   
+
 }
 
 #sectionChips div {
     display: flex;
     align-items: center;
     width: hug 203px;
-    height:hug 53px;
+    height: hug 53px;
     padding: 17px 18px 17px 18px;
     border-radius: 10px;
     gap: 60px;
